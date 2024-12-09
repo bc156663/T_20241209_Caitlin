@@ -75,6 +75,10 @@ app.get('/ueberweisungAusfuehren', (req, res) => {
 	res.render('ueberweisungAusfuehren.ejs',{});
 });
 
+app.get('/profil', (req, res) => {
+	res.render('profil.ejs',{});
+});
+
 // Die Funktion app.get('/geldAnlegen...) wird abgearbeitet, wenn der Benutzer die Seite geldAnlegen
 // im Browser ansurft.
 
@@ -94,28 +98,58 @@ app.get('/geldAnlegen', (req, res) => {
 	})
 });
 
-// Die Funktion app.post('/geldAnlegen...) wird abgearbeitet, wenn der Kunde auf dem Formular den Absenden-Button klickt.
-
 app.post('/geldAnlegen', (req, res) => {
 
-	// Die Werte, die der Kunde im Formular eingegeben hat, werden an den Server gesendet.
-	// Der Wert der Variablen Betrag wird aus dem body der Kundenanfrage (req) ausgelesen und zugewiesen an die lokale Variable
-	// namens betrag.
+	let Betrag = req.body.Betrag;
+	console.log("geldAnlegen: Gewünschter Betrag: " + kreditbetrag + " Euro")
 
-	let betrag = req.body.Betrag;
-	console.log("geldAnlegen: Gewünschter Betrag: " + betrag + " Euro")
-
-	let laufzeit = req.body.Laufzeit;
-	console.log("geldAnlegen: Gewünschte Laufzeit: " + laufzeit + " Jahre")
+	let Laufzeit = req.body.Laufzeit;
+	console.log("geldAnlegen: Gewünschter Zinssatz: " + laufzeit +)
 
 	let zinssatz = 0.1
-
+	
 	let zinsen = betrag * zinssatz;
 
 	res.render('geldAnlegen.ejs',{
 		Betrag: betrag,
 		Laufzeit: laufzeit,
 		Meldung: "Ihre Zinsen betragen: " + zinsen
+	});
+});
+
+
+app.get('/kreditBeantragen', (req, res) => {
+	res.render('kreditBeantragen.ejs',{
+		Kreditbetrag:120,
+		Zinssatz:2,
+		Monate:12
+		Meldung: ""
+	})
+});
+
+
+app.post('/kreditBeantragen', (req, res) => {
+
+	let Kreditbetrag = req.body.Kreditbetrag;
+	console.log("kreditBeantragen: Gewünschter Betrag: " + kreditbetrag + " Euro")
+
+	let Zinssatz = req.body.Zinssatz;
+	console.log("kreditBeantragen: Gewünschter Zinssatz: " + zinssatz +)
+
+	let zinssatz = 0.1
+	
+	let Monate = req.body.Monate;
+	console.log("kreditBeantragen: Gewünschte Laufzeit: " + monate +)
+
+	let monate = 12
+
+	let rückzahlungsbetrag = betrag * zinssatz*monate;
+
+	res.render('kreditBeantragen.ejs',{
+		Kreditbetrag: betrag,
+		Zinssatz: laufzeit,
+		Monate: monate,
+		Meldung: "Ihr Rückzahlungsbetrag am Ende der gewünschten Laufzeit beträgt: " + rückzahlungsbetrag
 	});
 });
 

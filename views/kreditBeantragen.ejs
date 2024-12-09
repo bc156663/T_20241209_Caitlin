@@ -22,6 +22,20 @@
     </header>
     <main>
         <H1>Kredit beantragen</H1>
+
+        <form method="post">
+            <label>Gewünschter Kreditbetrag in Euro</label></br>
+            <input type="number" name="Kreditbetrag" value=<%= Kreditbetrag %>></br>
+            <label>Gewünschter Zinssatz</label></br>
+            <input ype="number" name="Zinssatz" value=<%= Zinssatz %>></br>
+            <label>Gewünschte Laufzeit in Monaten</label></br>
+            <input ype="number" name="Monate" value=<%= Monate %>></br>
+            <input type="number" placeholder="multiple of 10" step="10" min="0" />
+            <h1>Mit diesem Button können Sie Ihren Rückzahlungsbetrag am Ende der gewünschten Laufzeit berechnen.</h1>
+            <button type="submit" formaction="/kreditBeantragen">Kredit berechnen</button>
+            
+        </form>
+        <p><%= Meldung %></p>
     </main>
 
     <footer>
